@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        div {
+            margin-bottom: 10px;
+        }
+
+        body {
+            padding-bottom: 30px;
+        }
+
+        .active {
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    {{message}}
+</div>
+
+<div id="app-2">
+    <span v-bind:title="message">
+        鼠标悬停几秒钟查看此处动态绑定的提示信息！
+    </span>
+</div>
+
+<div id="app-3">
+    <p v-if="seen">you see me now</p>
+</div>
+
+<div id="app-4">
+    <ol>
+        <li v-for="todo in todos">
+            {{todo.text}}
+        </li>
+    </ol>
+</div>
+
+<div id="app-5">
+    <p>{{message}}</p>
+    <button v-on:click="reverseMessage">反转消息</button>
+</div>
+
+<div id="app-6">
+    <p>{{message}}</p>
+    <input type="text" v-model="message">
+</div>
+
+
+<div id="app-7">
+    <ol>
+        <todo-item
+                v-for="item in groceryList"
+                v-bind:todo='item'
+                v-bind:key='item.id'
+        >
+        </todo-item>
+    </ol>
+</div>
+
+<div id="example">
+    <p>Original message:"{{message}}"</p>
+    <p>Computed reversed message: "{{reversedMessage}}"</p>
+</div>
+
+<div id="demo">{{fullName}}</div>
+
+
+<div id="todo-list-example">
+    <form v-on:submit.prevent="addNewTodo">
+        <label for="new-todo">
+            Add a todo
+        </label>
+        <input
+                type="text"
+                v-model="newTodoText"
+                id="new-todo"
+                placeholder="E.g. Feed the cat"
+        >
+        <button>Add</button>
+    </form>
+
+    <ul>
+        <li
+                is="todo-item"
+                v-for="(todo, index) in todos"
+                v-bind:key="todo.id"
+                v-bind:title="todo.title"
+                v-on:remove="todos.splice(index, 1)"
+        >
+        </li>
+    </ul>
+
+</div>
+
+<div id="example-1">
+    <button v-on:click="counter += 1"> Add 1</button>
+    <p>the button above has been clicked {{counter}} times.</p>
+</div>
+
+<div id="example-2">
+    <button v-on:click="greet">Greet</button>
+</div>
+
+<div id="example-3">
+    <button v-on:click="say('hi')">Say hi</button>
+    <button v-on:click="say('what')">Say hi</button>
+
+    <button v-on:click="warn('Form cannot be submitted yet.', $event)">
+        Submit
+    </button>
+</div>
+
+<div id="example-4">
+    <input type="text" v-model="message" placeholder="edit me">
+    <textarea name="" id="" cols="30" rows="10" placeholder="add multiple lines" v-model="message"></textarea>
+    <p>Message is: {{message}}</p>
+</div>
+
+<div id="example-5">
+    <input type="checkbox" id="jack" value="jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="john" v-model="checkedNames">
+    <label for="jack">john</label>
+    <input type="checkbox" id="mike" value="mike" v-model="checkedNames">
+    <label for="mike">Jack</label>
+    <br>
+    <span>Checked names:{{checkedNames}}</span>
+</div>
+
+<div id="components-demo">
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+</div>
+
+
+<div id="blog-post-demo">
+    <div :style="{fontSize: postFontSize + 'em'}">
+        <blog-post
+                v-for="post in posts"
+                :key="post.id"
+                v-bind:id="post.title"
+                v-bind:post="post"
+                v-on:enlarge-text="postFontSize += $event"
+        ></blog-post>
+    </div>
+</div>
+
+
+<div id="input-demo">
+    <custom-input v-model="value"></custom-input>
+    <div>{{value}}</div>
+
+</div>
+
+<div id="slot-example">
+    <alert-box>Something bad happened.</alert-box>
+</div>
+
+
+<div id="dynamic-component-demo">
+    <button
+        v-for="tab in tabs"
+        v-bind:key="tab"
+        v-bind:class="[{active: currentTab === tab}]"
+        @click="currentTab = tab"
+    >
+        {{tab}}
+    </button>
+    <component v-bind:is="currentTabComponent"></component>
+
+</div>
+
+
+</body>
+<script src="./1.js"></script>
+</html>
